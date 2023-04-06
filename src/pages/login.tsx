@@ -3,11 +3,11 @@ import axios from 'axios';
 import passport from 'passport';
 import { Strategy as TwitterStrategy } from 'passport-twitter';
 
-passport.use(
+(passport.use as any)(
   new TwitterStrategy(
     {
-        consumerKey: process.env.TWITTER_CONSUMER_KEY!,
-        consumerSecret: process.env.TWITTER_CONSUMER_SECRET!,
+        consumerKey: process.env.NEXT_PUBLIC_TWITTER_CONSUMER_KEY!,
+        consumerSecret: process.env.NEXT_PUBLIC_TWITTER_CONSUMER_SECRET!,
         callbackURL: '/api/auth/twitter/callback',
     },
     (accessToken, refreshToken, profile, cb) => {
@@ -22,7 +22,8 @@ export default function LoginPage() {
   const [message, setMessage] = useState<string | null>(null);
 
   const handleLogin = async () => {
-    try {
+      try {
+
       const res = await axios.get('/api/auth/twitter');
       window.location.href = res.data;
     } catch (error) {

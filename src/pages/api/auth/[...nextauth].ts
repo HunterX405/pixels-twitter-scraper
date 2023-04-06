@@ -1,10 +1,9 @@
-import NextAuth from "next-auth"
+import { Provider } from "next-auth/providers";
 import TwitterProvider from "next-auth/providers/twitter"
+import { NextApiRequest, NextApiResponse } from "next"
+import NextAuth, { NextAuthOptions, Session, User } from "next-auth"
 
-console.log("CLIENT:" + process.env.NEXT_PUBLIC_TWITTER_CLIENT_ID)
-console.log("SECRET:" + process.env.NEXT_PUBLIC_TWITTER_CLIENT_SECRET)
-console.log("SECRET2:" + process.env.NEXTAUTH_SECRET)
-export default NextAuth({
+const options: NextAuthOptions = {
     providers: [
         TwitterProvider({
             clientId: process.env.NEXT_PUBLIC_TWITTER_CLIENT_ID!,
@@ -12,9 +11,18 @@ export default NextAuth({
         }),
     ],
     callbacks: {
-        session({ session, token, user }) {
-          return session // The return type will match the one returned in `useSession()`
-        }
+        async signIn(params) {
+            const { user, account, profile } = params;
+            // your code here
+            return true;
+        },
+        async session(params) {
+            const { session, user } = params;
+            // your code here
+            return session;
+        },
     },
     secret: process.env.NEXTAUTH_SECRET
-});
+}
+
+export default (req: any, res: any) => NextAuth(req, res, options)

@@ -1,6 +1,9 @@
 import NextAuth from "next-auth"
 import TwitterProvider from "next-auth/providers/twitter"
 
+console.log("CLIENT:" + process.env.NEXT_PUBLIC_TWITTER_CLIENT_ID)
+console.log("SECRET:" + process.env.NEXT_PUBLIC_TWITTER_CLIENT_SECRET)
+console.log("SECRET2:" + process.env.NEXTAUTH_SECRET)
 export default NextAuth({
     providers: [
         TwitterProvider({

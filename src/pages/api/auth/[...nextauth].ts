@@ -12,5 +12,6 @@ export default NextAuth({
         session({ session, token, user }) {
           return session // The return type will match the one returned in `useSession()`
         }
-    }
+    },
+    secret: process.env.NEXTAUTH_SECRET
 });

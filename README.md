@@ -1,8 +1,17 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Setup
 
-First, run the development server:
+## Install required packages
+
+Run `npm install` to install the required packages for Next.js.<br/>
+Run `pip install -r requirements.txt` to install the required packages for the python script.
+
+## Running the server
+
+To run the server with the cron job run `npm run build && npm run start-cron` using the terminal in the root directory of your project.
+
+or run the development server:
 
 ```bash
 npm run dev
@@ -14,13 +23,39 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+# Twitter API v2
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Twitter API v2 requires the `Basic Plan` not the Free Plan in your Twitter Developer Portal to be able to search tweets.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+The Twitter API requires a `Basic Plan` that costs $100 to be able to search for tweets so make sure to upgrade your account to basic before using the Twitter API.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Twitter API Credentials
+
+To use the Twitter API functionality in this project, make sure to either change the credentials in the python script or create environment variables and pass them to the python script which is more secure.
+
+These are the required Environment Variables to use the Twitter API:
+```bash
+TWITTER_ID=
+TWITTER_SECRET=
+NEXTAUTH_URL=`
+NEXTAUTH_SECRET=
+CONSUMER_KEY=
+CONSUMER_SECRET=
+ACCESS_KEY=
+ACCESS_SECRET=
+```
+
+## Vercel
+
+This project is deployed on Vercel. Click [here](https://pixels-twitter-scraper.vercel.app/) to access the website.
+
+## Scraping Script
+
+Click [here](./scrape.py) to view the scraping script written in Python.
+
+## Cron Job Script
+
+Click [here](./vercel-cron.js) to view the cron job script that runs the python script every 15 minutes.
 
 ## Learn More
 
@@ -30,9 +65,3 @@ To learn more about Next.js, take a look at the following resources:
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

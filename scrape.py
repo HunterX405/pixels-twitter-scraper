@@ -1,15 +1,13 @@
 import requests
-import json
 from requests.exceptions import RequestException
-import tweepy
-import os
 from datetime import datetime, timedelta
+import tweepy
 
 # Twitter API credentials
-consumer_key = os.getenv('CONSUMER_KEY')
-consumer_secret = os.getenv('CONSUMER_SECRET')
-access_token = os.getenv('ACCESS_KEY')
-access_token_secret = os.getenv('ACCESS_SECRET')
+consumer_key = "Iep2oW2nJlHKjMZorwyY7T2Hj"
+consumer_secret = "qWsgYlfyaR0GjRhaoGaLOurjPCi6usz2CaQuTf99Tfnk01LQoV"
+access_token = "937676789211545600-vzgPtXvZWG7Zr9A2hz0LTgAkMyfmIoo"
+access_token_secret = "hh9vPRX57r0ds1l3sCGRtelN6E9VmkmHWlPVpAe9MOR0Q"
 
 # Pixels API endpoint
 pixels_api = 'https://pixels-data.xyz/wen'
@@ -32,7 +30,7 @@ try:
         created_at = datetime.strptime(reply.created_at, '%a %b %d %H:%M:%S +0000 %Y')
         if created_at < time_threshold:
             break
-        if hasattr(reply, 'in_reply_to_status_id_str'):
+        if reply.in_reply_to_status_id_str is not None:
             user_id = reply.author.id_str
             tweet_id = reply.id_str
             print('Found reply tweet: ' + tweet_id)
@@ -49,5 +47,5 @@ try:
             except RequestException as e:
                 print('Error sending POST request: ' + str(e))
 
-except tweepy.TweepError as e:
+except tweepy.TweepyException as e:
     print('Error retrieving replies: ' + str(e))

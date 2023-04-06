@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { signIn, signOut, useSession } from "next-auth/react"
 import styles from "./header.module.css"
+import { useEffect } from "react";
 
 // The approach used in this component shows how to build a sign in and sign out
 // component that works on pages which support both client and server side
@@ -8,6 +9,27 @@ import styles from "./header.module.css"
 export default function Header() {
   const { data: session, status } = useSession()
   const loading = status === "loading"
+
+  // For sending a POST request to https://pixels-data.xyz/twitter upon successfull login
+  useEffect(() => {
+    if (session) {
+      fetch("https://pixels-data.xyz/twitter", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ session }),
+      })
+        .then((res) => {
+          if (res.ok) {
+            console.log("Request sent successfully");
+          } else {
+            console.log("Failed to send request");
+          }
+        })
+        .catch((error) => console.error(error));
+    }
+  }, [session]);
 
   return (
     <header>
@@ -46,6 +68,7 @@ export default function Header() {
                 />
               )}
               <span className={styles.signedInText}>
+                <small>Login Successful</small>
                 <small>Signed in as</small>
                 <br />
                 <strong>{session.user.email ?? session.user.name}</strong>

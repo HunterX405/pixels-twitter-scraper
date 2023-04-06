@@ -7,10 +7,7 @@ export default function Footer() {
       <hr />
       <ul className={styles.navItems}>
         <li className={styles.navItem}>
-          <a href="https://www.npmjs.com/package/next-auth">NPM</a>
-        </li>
-        <li className={styles.navItem}>
-          <a href="https://github.com/nextauthjs/next-auth-example">GitHub</a>
+          <a href="https://github.com/HunterX405/pixels-twitter-scraper">GitHub@HunterX405/pixels-twitter-scraper</a>
         </li>
       </ul>
     </footer>

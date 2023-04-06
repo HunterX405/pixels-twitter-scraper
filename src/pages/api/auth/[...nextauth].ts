@@ -1,28 +1,25 @@
-import { Provider } from "next-auth/providers";
 import TwitterProvider from "next-auth/providers/twitter"
-import { NextApiRequest, NextApiResponse } from "next"
 import NextAuth, { NextAuthOptions, Session, User } from "next-auth"
 
-const options: NextAuthOptions = {
+// For more information on each option (and a full list of options) go to
+// https://next-auth.js.org/configuration/options
+export const authOptions: NextAuthOptions = {
+    // https://next-auth.js.org/configuration/providers/oauth
     providers: [
         TwitterProvider({
-            clientId: process.env.NEXT_PUBLIC_TWITTER_CLIENT_ID!,
-            clientSecret: process.env.NEXT_PUBLIC_TWITTER_CLIENT_SECRET!
+            clientId: process.env.TWITTER_ID!,
+            clientSecret: process.env.TWITTER_SECRET!,
         }),
     ],
+    theme: {
+        colorScheme: "light",
+    },
     callbacks: {
-        async signIn(params) {
-            const { user, account, profile } = params;
-            // your code here
-            return true;
-        },
-        async session(params) {
-            const { session, user } = params;
-            // your code here
-            return session;
+        async jwt({ token }) {
+            token.userRole = "admin"
+            return token
         },
     },
-    secret: process.env.NEXTAUTH_SECRET
 }
 
-export default (req: any, res: any) => NextAuth(req, res, options)
+export default NextAuth(authOptions)

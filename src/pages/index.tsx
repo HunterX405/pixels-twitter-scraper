@@ -1,27 +1,13 @@
-import { signIn, signOut, useSession } from "next-auth/react";
+import Layout from "../components/layout"
 
-export default function Home() {
-  // `session` will match the returned value of `callbacks.session()` from `NextAuth()`
-  const { data: session, status } = useSession()
-
-  if (status === "loading") {
-    return <div>Loading...</div>;
-  }
-
-  if (!session) {
-    return (
-      <div>
-        <button onClick={() => signIn("twitter")}>Sign in with Twitter</button>
-      </div>
-    );
-  }
-
+export default function IndexPage() {
   return (
-    <div>
-      {session.user && (
-        <p>Signed in as {session.user.email ?? session.user.name}</p>
-      )}
-      <button onClick={() => signOut()}>Sign out</button>
-    </div>
-  );
+    <Layout>
+      <h1>NextAuth.js Example</h1>
+      <p>
+        This is an example site to demonstrate how to use{" "}
+        <a href="https://next-auth.js.org">NextAuth.js</a> for authentication.
+      </p>
+    </Layout>
+  )
 }

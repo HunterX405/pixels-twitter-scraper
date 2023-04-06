@@ -25,7 +25,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 # Twitter API v2
 
-## Twitter API v2 requires the `Basic Plan` not the Free Plan in your Twitter Developer Portal to be able to search tweets.
+## `Basic Plan` required for Twitter API v2
 
 The Twitter API requires a `Basic Plan` that costs $100 to be able to search for tweets so make sure to upgrade your account to basic before using the Twitter API.
 
@@ -47,6 +47,7 @@ ACCESS_SECRET=
 
 ## Vercel
 
+### Note: This website uses the Free Plan for the Twitter API so the python scripts that searches for tweets will not run or execute.
 This project is deployed on Vercel. Click [here](https://pixels-twitter-scraper.vercel.app/) to access the website.
 
 ## Scraping Script
